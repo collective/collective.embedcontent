@@ -30,8 +30,7 @@ def generateUniqueIDForPackageFile(fileObj):
     return str(hash(fileObj))
 
 def getEmbedContentPackageUrl(content):
-    randomID = getattr(content, 'contentHash', None)
-    return '%s/@@contents/%s/%s' % (content.absolute_url(), randomID, content.index_file)
+    return f'{content.absolute_url()}/@@contents/{content.index_file}'
 
 def getTopLevelFiles(zipTree):
     return [key for key in zipTree.iterkeys() if not isinstance(zipTree[key],OOBTree)]
@@ -165,7 +164,7 @@ class EmbedContentContentView(BrowserView):
     def publishTraverse(self, request, name):
         path =  request.URL[len(self.context.absolute_url()):].split('/')
         zipTree = getattr(self.context,'zipTree', None)
-        for element in path[3:]:
+        for element in path[2:]:
             try:
                 zipTree = zipTree[unquote(element)]
             # TODO: more specific exception, maybe TypeError?. This is way too broad and makes it hard to know when there's actually a problem
