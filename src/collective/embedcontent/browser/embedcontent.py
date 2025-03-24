@@ -96,6 +96,9 @@ def onContentUpdated(obj):
         setattr(obj, 'zipTree', OOBTree())
     guessIndexFile(obj)
 
+def contentChangeEventHandler(context, event):
+    onContentUpdated(context)
+
 
 class EmbedContentAddForm(dexterityadd.DefaultAddForm):
     portal_type = 'EmbedContent'

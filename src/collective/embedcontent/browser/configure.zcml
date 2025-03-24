@@ -98,6 +98,16 @@
     template="embedcontenttile.pt"
     /> -->
 
+  <subscriber
+      for="collective.embedcontent.content.embedcontent.IEmbedContent
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler="collective.embedcontent.browser.embedcontent.contentChangeEventHandler"
+      />
+  <subscriber
+      for="collective.embedcontent.content.embedcontent.IEmbedContent
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler="collective.embedcontent.browser.embedcontent.contentChangeEventHandler"
+      />
 
 
 </configure>
